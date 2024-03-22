@@ -1,8 +1,12 @@
 const express = require("express");
 const connection = require("./config/db");
 const userRouter = require("./router/userRouter");
+const authentication = require("./middlewares/authentication");
+const flightRouter = require("./router/flightRouter");
 
 const app = express();
+
+app.use("/", userRouter);
 
 app.get("/", async (req, res) => {
   try {
@@ -12,7 +16,8 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.use("/", userRouter);
+// app.use(authentication);
+app.use("/", flightRouter)
 
 const PORT = 8080;
 app.listen(PORT, async () => {

@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const userModel = require("../models/userModel");
 
-const app = express();
 
 const userRouter = express.Router();
 userRouter.use(express.json());
@@ -46,16 +45,28 @@ userRouter.post("/login", async (req, res) => {
       bcrypt.compare(password, hashedPassword, async function (err, result) {
         // result == true
         if (result) {
-          const token = jwt.sign({ user_id: user._id }, "masai", {
+          const token = jwt.sign({ userId: user._id }, "masai", {
             expiresIn: "7d",
           });
-          
-          res.status(201).send({ token, message: `USER SUCCESSFULLY LOGIN `, user_id: user._id })
+
+          res.status(201).send({
+            token,
+            message: `USER SUCCESSFULLY LOGIN `,
+            userId: user._id,
+          });
+        } else {
+          console.log(err.message);
         }
       });
+    } 
+    else {
+      console.log(`User Not Found Pls Register`);
+      res.status(404).send({ message: "Password Incorrect" });
     }
-  } catch (error) {
+  } 
+  catch (error) {
     console.log(error);
+    res.status(404).send({ message: "login error" });
   }
 });
 
