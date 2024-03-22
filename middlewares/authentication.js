@@ -5,7 +5,7 @@ const authentication = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
     console.log(token);
     if (!token) {
-      res.send({ msg: "login first" });
+      res.status(401).send({ msg: "login first" });
     }
 
     jwt.verify(token, "masai", async function (err, decoded) {
