@@ -141,5 +141,5 @@ This repository contains the backend code for an Air Ticket Booking system. It i
   - **Response**: 
     - **Status Code**: 202
 
-Backend deployed link: [https://airticketbookingbackend.onrender.com](Backend Deployed Link)
+Backend deployed link: `https://airticketbookingbackend.onrender.com`
 
